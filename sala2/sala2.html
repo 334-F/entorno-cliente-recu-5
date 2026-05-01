@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sala 2. La Biblioteca</title>
+  <link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body>
+  <div class="sala">
+    <h2>Sala 2. La Biblioteca</h2>
+    <p class="descripcion">
+      La puerta tiene un panel de seguridad electrónico. El código que encontraste
+      en la Sala 1 tiene 4 caracteres. Solo letras y números, sin vocales.
+    </p>
+
+    <!-- Teclado de seguridad: keyboard events -->
+    <div class="panel-teclado">
+      <h3>Panel de seguridad</h3>
+      <p>Introduce el código (pulsa ENTER para confirmar):</p>
+      <input type="text" id="inputCodigo" maxlength="4" placeholder="____" autocomplete="off" spellcheck="false">
+      <p id="mensajeTeclado">Escribe el código y pulsa ENTER.</p>
+    </div>
+
+    <!-- Puerta: se abre con CustomEvent -->
+    <div class="puerta" id="puerta">
+      <span id="iconoPuerta">🚪</span>
+      <p id="estadoPuerta">CERRADA</p>
+    </div>
+    <p id="mensajePuerta"></p>
+
+    <a href="../index.html" class="btn-volver">← Volver al menú</a>
+  </div>
+
+  <script src="sala2.js"></script>
+</body>
+
+</html>
