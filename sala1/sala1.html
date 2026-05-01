@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sala 1. El Laboratorio</title>
+  <link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body>
+  <div class="sala">
+    <h2>Sala 1: El Laboratorio</h2>
+    <p class="descripcion">
+      Explora la sala moviendo el ratón para localizar la pista oculta.
+      La combinación de la caja fuerte está en algún lugar del laboratorio.
+    </p>
+
+    <!-- Área de exploración: mousemove + getBoundingClientRect -->
+    <h3>Área de exploración</h3>
+    <div class="area-exploracion" id="area">
+      <span class="hint">Mueve el ratón para explorar...</span>
+      <div class="objeto-oculto" id="objetoOculto">🔑</div>
+    </div>
+    <p id="coordenadas">Coordenadas: (-, -)</p>
+    <p id="mensaje-area"></p>
+
+    <!-- Caja fuerte: handleEvent (click y doble click) -->
+    <div class="panel-cofre">
+      <h3>Caja fuerte</h3>
+      <div class="cofre" id="cofre">🔒</div>
+      <p id="mensaje-cofre">Clic: intentar abrir. Doble clic: forzar cerradura.</p>
+    </div>
+
+    <!-- Panel de alarma: propagación y captura -->
+    <h3>Panel de control (prueba de propagación)</h3>
+    <p style="font-size:0.75rem; color:#555; margin-bottom:0.5rem">
+      Haz clic en los elementos anidados y observa el orden de propagación.
+    </p>
+    <div class="panel-alarma" id="panelAlarma" data-externo>
+      Panel exterior
+      <div class="boton-alarma" id="botonAlarma">
+        Botón medio
+        <span class="luz" id="luz">💡</span>
+      </div>
+    </div>
+    <p id="mensaje-propagacion">(haz clic para ver los eventos)</p>
+
+    <a href="../index.html" class="btn-volver">← Volver al menú</a>
+  </div>
+
+  <script src="sala1.js"></script>
+</body>
+
+</html>
