@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sala 3. El Almacén</title>
+  <link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body>
+  <!-- Info de scroll y tamaño (posición fija) -->
+  <div class="info-ventana" id="infoVentana">
+    <p>Scroll: <span id="scrollVal">0</span>px</p>
+    <p>Ventana: <span id="sizeVal">-</span></p>
+  </div>
+
+  <div class="sala">
+    <h2>Sala 3. El Almacén</h2>
+    <p class="descripcion">
+      Coloca los objetos en su estantería,sube el fichero de registro 
+      y rellena el formulario de salida para escapar.
+    </p>
+
+    <!-- Puzzle arrastrar y soltar (objetos) -->
+    <div class="seccion-drag">
+      <h3>Ordenar el almacén</h3>
+      <p style="font-size:0.78rem; color:#555">Arrastra cada objeto a su estantería correspondiente.</p>
+      <div class="objetos-drag" id="objetosDrag">
+        <div class="objeto-arrastrable" draggable="true" data-id="llave">🔑 Llave</div>
+        <div class="objeto-arrastrable" draggable="true" data-id="mapa">🗺️ Mapa</div>
+        <div class="objeto-arrastrable" draggable="true" data-id="codigo">📋 Código</div>
+      </div>
+
+      <div class="estanterias">
+        <div class="estanteria" id="est-llave" data-acepta="llave">
+          <span>Estantería A (llaves)</span>
+        </div>
+        <div class="estanteria" id="est-mapa" data-acepta="mapa">
+          <span>Estantería B (mapas)</span>
+        </div>
+        <div class="estanteria" id="est-codigo" data-acepta="codigo">
+          <span>Estantería C (códigos)</span>
+        </div>
+      </div>
+      <p id="mensajeDrag">0/3 objetos colocados.</p>
+    </div>
+
+    <!-- Arrastrar y soltar fichero -->
+    <div class="seccion-fichero">
+      <h3>Registro de entrada</h3>
+      <div class="drop-fichero" id="dropFichero">
+        <p>Arrastra el fichero de registro aquí</p>
+        <p style="font-size:0.75rem; margin-top:0.3rem">haz clic para seleccionar</p>
+        <input type="file" id="inputFichero" style="display:none">
+      </div>
+      <p id="infoFichero">Aquí se mostrará la información del fichero.</p>
+    </div>
+
+    <!-- Formulario con regex -->
+    <div class="seccion-formulario">
+      <h3>Formulario de salida</h3>
+      <form id="formEscape" action="#" method="post">
+        <label for="fNombre">Nombre del agente (solo letras):</label>
+        <input type="text" name="nombre" id="fNombre" placeholder="Ej: Ana García">
+
+        <label for="fCodigo">Código de acceso (2 mayúsculas + 4 números):</label>
+        <input type="text" name="codigo" id="fCodigo" placeholder="Ej: AB1234">
+
+        <label for="fEmail">Email de contacto:</label>
+        <input type="email" name="email" id="fEmail" placeholder="nombre@dominio.com">
+
+        <label for="fHora">Hora de escape (HH:MM):</label>
+        <input type="text" name="hora" id="fHora" placeholder="Ej: 14:30">
+
+        <button type="submit">Enviar registro y escapar</button>
+      </form>
+      <p id="mensajeForm"></p>
+    </div>
+
+    <!-- Contenido extra para poder hacer scroll -->
+    <div class="contenido-extra">
+      <h3>Diario del almacén</h3>
+      <p>Día 1: Se recibieron 47 cajas de material sin clasificar...</p>
+      <p>Día 3: El personal anterior no encontró la salida. Atención: hay una pista al final de este diario.</p>
+      <p>Día 7: Las estanterías siguen desordenadas. Hay objetos por todas partes.</p>
+      <p>Día 12: Alguien dejó una nota: "El código del formulario está en la sala anterior".</p>
+      <p>Día 15: Última entrada conocida. El almacén sigue cerrado.</p>
+      <br><br><br><br><br>
+      <p style="color:#333">· · ·</p>
+      <br><br><br>
+      <p style="color:#555">Has llegado al final del diario.</p>
+      <p style="color:#555">Pista final: el código del formulario es AB1234.</p>
+      <br><br><br>
+    </div>
+
+    <a href="../index.html" class="btn-volver">← Volver al menú</a>
+  </div>
+
+  <script src="sala3.js"></script>
+</body>
+
+</html>
