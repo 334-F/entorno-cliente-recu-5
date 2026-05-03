@@ -1,5 +1,4 @@
 // Sala 2 - La Biblioteca
-// Práctica Unidad 5
 
 const inputCodigo = document.getElementById("inputCodigo");
 const mensajeTecla = document.getElementById("mensajeTeclado");
@@ -8,24 +7,21 @@ const mensajePuerta = document.getElementById("mensajePuerta");
 
 const CODIGO_CORRECTO = "X4B7";
 
-// Estado de BLOQ MAYÚS (null = aún no lo sabemos al arrancar)
+// Estado de BLOQ MAYÚS que es null porque aún no lo sabemos al arrancar
 let capsActivo = null;
 
-// =====================================================================
-// Práctica Unidad 5. Sala 2. Validación de caracteres alfanuméricos
-// =====================================================================
-
+// Sala 2. Validación de caracteres alfanuméricos
 inputCodigo.addEventListener("keydown", function (e) {
 
-    // --- Vocales bloqueadas (sin aviso, simplemente se impide) ---
+    // Vocales bloqueadas (sin aviso, simplemente se impide) 
     const vocales = ["KeyA", "KeyE", "KeyI", "KeyO", "KeyU"];
     if (vocales.includes(e.code)) {
         e.preventDefault();
         return;
     }
 
-    // --- Solo se permiten caracteres alfanuméricos ---
-    // Dejamos pasar teclas de control (retroceso, flechas, tabulador, etc.)
+    //Solo permito que sean caracteres alfanuméricos
+    // Dejamos pasar teclas de control como retroceso, flechas, tabulador, etc...
     const teclasControl = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "Enter", "CapsLock"];
     const esAlfanumerico = /^[a-zA-Z0-9]$/.test(e.key);
 
@@ -35,11 +31,9 @@ inputCodigo.addEventListener("keydown", function (e) {
         return;
     }
 
-    // =====================================================================
-    // Práctica Unidad 5. Sala 2. Validación de teclas especiales
-    // =====================================================================
+    // Sala 2. Validación de teclas especiales
 
-    // ENTER: intentar abrir la puerta
+    // Pulsar ENTER para intentar abrir la puerta
     if (e.key === "Enter") {
         e.preventDefault();
         comprobarCodigo();
@@ -49,12 +43,12 @@ inputCodigo.addEventListener("keydown", function (e) {
     // CTRL+C y CTRL+V bloqueados: no se puede copiar ni pegar el código
     if (e.ctrlKey && (e.code === "KeyC" || e.code === "KeyV")) {
         e.preventDefault();
-        mensajeTecla.textContent = "No puedes copiar ni pegar. Escribe el código tú mismo.";
+        mensajeTecla.textContent = "No puedes copiar ni pegar.";
         return;
     }
 
     // Detectar activación/desactivación de BLOQ MAYÚS
-    // getModifierState("CapsLock") dice si está activo en ese momento
+    // He utilizado el getModifierState("CapsLock") que dice si está activo en ese momento
     let capsAhora = e.getModifierState("CapsLock");
     if (e.code === "CapsLock" && capsAhora !== capsActivo) {
         mensajeTecla.textContent = capsAhora ? "BLOQ MAYÚS activado." : "BLOQ MAYÚS desactivado.";
@@ -62,32 +56,29 @@ inputCodigo.addEventListener("keydown", function (e) {
     }
 });
 
-// =====================================================================
-// Práctica Unidad 5. Sala 2. Detectar tecla SHIFT al soltarla
-// =====================================================================
-
+// Sala 2. Detectar tecla SHIFT al soltarla
 inputCodigo.addEventListener("keyup", function (e) {
     if (e.key === "Shift") {
-        mensajeTecla.textContent = "Soltaste SHIFT: ya no escribes en mayúsculas (si no está BLOQ MAYÚS).";
+        mensajeTecla.textContent = "Soltaste SHIFT: ya no estas escribiendo bien en mayúsculas .";
     }
 });
 
-// =====================================================================
-// Práctica Unidad 5. Sala 2. CustomEvent al resolver el puzzle
-// =====================================================================
+
+//Sala 2. CustomEvent al resolver el puzzle
+
 
 function comprobarCodigo() {
     let valor = inputCodigo.value.toUpperCase();
 
     if (valor === CODIGO_CORRECTO) {
         // Creamos y lanzamos el evento personalizado desde la puerta
-        // bubbles: true para que suba y podamos escucharlo también desde document
+        // bubbles: para que suba DOM y podamos escucharlo también desde document
         let eventoAbrir = new CustomEvent("puertaAbierta", {
-            bubbles: true,
-            cancelable: true,
+            bubbles: true,   
+            cancelable: true, //Permite que otros listeners detengan el evento usando e.preventDefault().
             detail: {
                 sala: 2,
-                mensaje: "¡Correcto! Sala 2 completada. Puedes pasar al Almacén."
+                mensaje: "Correcto! La sala 2 completada. Puedes pasar al Almacén."
             }
         });
         puerta.dispatchEvent(eventoAbrir);
@@ -106,7 +97,7 @@ puerta.addEventListener("puertaAbierta", function (e) {
     inputCodigo.disabled = true;
 });
 
-// El evento también sube (bubbles: true), lo podemos escuchar en document
+// El evento también sube de bubbles: true, lo que podemos escuchar en document
 document.addEventListener("puertaAbierta", function (e) {
     console.log("Evento puertaAbierta recibido en document:", e.detail);
 });

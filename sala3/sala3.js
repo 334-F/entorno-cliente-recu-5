@@ -1,9 +1,7 @@
 // Sala 3 - El Almacén 
 // Práctica Unidad 5
 
-// =====================================================================
-// Práctica Unidad 5. Sala 3. Se crea sala nueva con arrastrar y soltar objetos
-// =====================================================================
+// Sala 3. Se crea sala nueva con arrastrar y soltar objetos
 
 const mensajeDrag = document.getElementById("mensajeDrag");
 let objetosColocados = 0;
@@ -24,7 +22,7 @@ document.querySelectorAll(".objeto-arrastrable").forEach(function (obj) {
     });
 });
 
-// Eventos en las estanterías (zonas de destino)
+// Eventos en las estanterías 
 document.querySelectorAll(".estanteria").forEach(function (estanteria) {
     // dragover: hay que llamar preventDefault o el drop no funcionaría
     estanteria.addEventListener("dragover", function (e) {
@@ -44,7 +42,7 @@ document.querySelectorAll(".estanteria").forEach(function (estanteria) {
         let acepta = estanteria.dataset.acepta;
 
         if (idObjeto === acepta && elementoArrastrado !== null) {
-            // Objeto correcto: lo movemos dentro de la estantería
+            // Los Objetos correspondidos: lo movemos dentro de la estantería
             estanteria.appendChild(elementoArrastrado);
             elementoArrastrado.setAttribute("draggable", "false");
             elementoArrastrado.style.opacity = "1";
@@ -61,9 +59,7 @@ document.querySelectorAll(".estanteria").forEach(function (estanteria) {
     });
 });
 
-// =====================================================================
-// Práctica Unidad 5. Sala 3. Se añade drag & drop para subir ficheros
-// =====================================================================
+//Sala 3. Se añade drag & drop para subir ficheros
 
 const dropFichero = document.getElementById("dropFichero");
 const inputFichero = document.getElementById("inputFichero");
@@ -113,9 +109,7 @@ function mostrarInfoFichero(file) {
         "<strong>Tipo:</strong> " + (file.type || "Desconocido");
 }
 
-// =====================================================================
 // Práctica Unidad 5. Sala 3. Se añaden eventos de scroll y redimensión de ventana
-// =====================================================================
 
 const scrollVal = document.getElementById("scrollVal");
 const sizeVal = document.getElementById("sizeVal");
@@ -126,7 +120,7 @@ sizeVal.textContent = window.innerWidth + " x " + window.innerHeight;
 let yaAvisadoFinal = false;
 
 window.addEventListener("scroll", function () {
-    // window.scrollY = cuántos píxeles hemos bajado
+    // window.scrollY = para ver cuántos píxeles hemos bajado
     scrollVal.textContent = Math.round(window.scrollY);
 
     // Detectar si hemos llegado al final del documento
@@ -139,13 +133,12 @@ window.addEventListener("scroll", function () {
 });
 
 window.addEventListener("resize", function () {
-    // window.innerWidth/innerHeight = tamaño visible de la ventana
+    // window.innerWidth/innerHeight = para ver el tamaño visible de la ventana
     sizeVal.textContent = window.innerWidth + " x " + window.innerHeight;
 });
 
-// =====================================================================
-// Práctica Unidad 5. Sala 3. Se añade formulario con validaciones y expresiones regulares
-// =====================================================================
+// Sala 3. Se añade formulario con validaciones y expresiones regulares
+
 
 const formEscape = document.getElementById("formEscape");
 const mensajeForm = document.getElementById("mensajeForm");
@@ -165,7 +158,7 @@ formEscape.addEventListener("submit", function (e) {
         return;
     }
 
-    // Expresión regular: nombre solo con letras (incluyendo acentos y ñ) y espacios
+    // Expresión regular: nombre solo con letras y espacios
     // ^ inicio, $ fin, + uno o más caracteres del grupo
     let regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
     if (!regexNombre.test(nombre)) {

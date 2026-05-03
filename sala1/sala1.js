@@ -1,22 +1,19 @@
 // Sala 1 - El Laboratorio
 // Práctica Unidad 5
 
-// =====================================================================
-// Práctica Unidad 5. Sala 1. Eventos de ratón con coordenadas y tamaño
-// =====================================================================
+//Sala 1. Empleando eventos de ratón con coordenadas y de tamaño
 
 const area = document.getElementById("area");
 const objetoOculto = document.getElementById("objetoOculto");
 const coordenadasP = document.getElementById("coordenadas");
 const mensajeArea = document.getElementById("mensaje-area");
 
-// Posición donde está escondida la pista
+// Posición de donde está escondida la pista
 const PISTA_X = 200;
 const PISTA_Y = 90;
 const MARGEN = 35;
 
-// Colocamos el objeto oculto en esa posición usando offsetWidth/offsetHeight
-// (offsetWidth y offsetHeight incluyen padding y borde del elemento)
+// Colocamos el objeto oculto en esa posición usando offsetWidth/offsetHeight, cuyos incluyen padding y borde del elemento
 objetoOculto.style.left = PISTA_X + "px";
 objetoOculto.style.top  = PISTA_Y + "px";
 
@@ -35,7 +32,7 @@ area.addEventListener("mousemove", function(e) {
     // Comprobamos si el ratón está cerca de la pista
     if (Math.abs(x - PISTA_X) < MARGEN && Math.abs(y - PISTA_Y) < MARGEN) {
         objetoOculto.style.opacity = "1";
-        mensajeArea.textContent = "¡Has encontrado algo! La combinación es: X4B7";
+        mensajeArea.textContent = "Has encontrado algo! La combinación es: X4B7";
         pistaEncontrada = true;
     } else {
         objetoOculto.style.opacity = "0";
@@ -49,9 +46,8 @@ area.addEventListener("mouseout", function() {
     coordenadasP.textContent = "Coordenadas: (-, -)";
 });
 
-// =====================================================================
-// Práctica Unidad 5. Sala 1. Se implementa handleEvent para la caja fuerte
-// =====================================================================
+// Sala 1. Se implementa handleEvent para la caja fuerte
+
 
 const cofre = document.getElementById("cofre");
 const mensajeCofre = document.getElementById("mensaje-cofre");
@@ -63,8 +59,7 @@ class GestorCofre {
         this.intentos = 0;
     }
 
-    // El navegador llama a este método automáticamente cuando ocurre un evento
-    // porque le pasamos el objeto (this) en addEventListener
+    // El navegador llama a este método automáticamente cuando ocurre un evento porque le pasamos el objeto this en addEventListener
     handleEvent(e) {
         if (e.type === "click") {
             this.intentarAbrir();
@@ -77,7 +72,7 @@ class GestorCofre {
         this.intentos++;
         if (pistaEncontrada) {
             this.elemento.textContent = "🔓";
-            this.msgElem.textContent = "¡Abierta! Dentro hay una tarjeta con el código de la Sala 2: X4B7";
+            this.msgElem.textContent = " Candado abiertao! Dentro hay una tarjeta con el código de la Sala 2: X4B7";
         } else {
             this.msgElem.textContent = "Intento " + this.intentos + ": primero encuentra la combinación en el laboratorio.";
         }
@@ -85,7 +80,7 @@ class GestorCofre {
 
     forzarCerradura() {
         this.msgElem.textContent = "Intentas forzar la cerradura... está reforzada, no funciona.";
-        // Pequeña animación de sacudida
+        // Pequeña animación de sacudida usando transform rotate y setTimeout
         this.elemento.style.transform = "rotate(8deg)";
         setTimeout(() => {
             this.elemento.style.transform = "rotate(-5deg)";
@@ -98,13 +93,13 @@ class GestorCofre {
 
 const gestorCofre = new GestorCofre(cofre, mensajeCofre);
 
-// Pasamos el objeto gestor como manejador (tiene el método handleEvent)
+// Pasamos el objeto gestor como manejador que tiene el método handleEvent(hecho de antes)
 cofre.addEventListener("click", gestorCofre);
 cofre.addEventListener("dblclick", gestorCofre);
 
-// =====================================================================
-// Práctica Unidad 5. Sala 1. Se añade propagación de eventos en panel de alarma
-// =====================================================================
+
+// Sala 1. Se añade propagación de eventos en panel de alarma
+
 
 const panelAlarma = document.getElementById("panelAlarma");
 const botonAlarma = document.getElementById("botonAlarma");
@@ -129,7 +124,7 @@ function logEvento(e) {
     mensajeProp.innerHTML += linea + "<br>";
 }
 
-// Asignamos el mismo manejador en captura (true) y en propagación (sin tercer param)
+// Asigno el mismo manejador en captura (true) y en propagación (sin el tercer param)
 panelAlarma.addEventListener("click", logEvento, true);
 panelAlarma.addEventListener("click", logEvento);
 
@@ -139,7 +134,7 @@ botonAlarma.addEventListener("click", logEvento);
 luz.addEventListener("click", logEvento, true);
 luz.addEventListener("click", logEvento);
 
-// Al hacer clic en el mensaje se borra (igual que en el ejercicio 2)
+// Al hacer clic en el mensaje se borra 
 mensajeProp.addEventListener("click", function() {
     mensajeProp.innerHTML = "(haz clic arriba para ver los eventos)";
 });
